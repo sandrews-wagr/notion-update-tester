@@ -1,0 +1,25 @@
+name: Notion-Update
+
+on:
+  pull_request:
+    types: [ opened, merged, reopened ]
+jobs:
+  update_notion:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Update Notion
+        uses: ThomasF34/update-notion@1.2.1
+        env:
+          NOTION_BOT_SECRET_KEY: ${{ secrets.NOTION_BOT_SECRET_KEY }}
+        with:
+          required-suffix: ')'
+          required-prefix: '[Notion Ticket]('
+          status-property-name: 'Status'
+          github-url-property-name: 'Pull Request'
+          opened: 'Peer Review'
+          edited: 'Peer Review'
+          merged: 'Deployed 🙌'
+          reopened: 'Peer Review'
+          ready_for_review: 'Peer Review'
+          review_requested: 'Peer Review'
